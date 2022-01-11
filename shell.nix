@@ -1,6 +1,11 @@
-{ system ? builtins.currentSystem }:
+{ system ? builtins.currentSystem, sources ? import ./nix/sources.nix }:
 
-with import ./nixpkgs.nix { inherit system; };
+let
+  replaceOrmolu = self: super: {
+    ormolu = (import sources.ormolu {}).ormolu;
+  };
+  pkgs = import sources.nixpkgs { inherit system; overlays = [ replaceOrmolu ]; };
+in with pkgs;
 
 mkShell {
   # Set UTF-8 local so that run-tests can parse GHC's unicode output.
@@ -13,6 +18,7 @@ mkShell {
     nix
     stack
     cacert
+    ormolu
   ];
 }
 
