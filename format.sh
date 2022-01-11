@@ -9,7 +9,4 @@ export LANG="C.UTF-8"
 
 cabal format
 
-ormolu -m inplace $(find src -type f -name "*.hs-boot" -o -name "*.hs")
-ormolu -m inplace $(find test -type f -name "*.hs-boot" -o -name "*.hs")
-ormolu -m inplace $(find examples -type f -name "*.hs-boot" -o -name "*.hs")
-ormolu -m inplace $(find bench -type f -name "*.hs-boot" -o -name "*.hs")
+ormolu -m inplace $(find . -type f -name "*.hs-boot" -o -name "*.hs")
